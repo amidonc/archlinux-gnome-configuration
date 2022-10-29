@@ -21,7 +21,7 @@ check(){
     fi
 }
 
-log "Refreshing package database"
+log "Refreshing pacman package database"
 sudo pacman -Sy
 check "$?" "pacman"
 
@@ -35,7 +35,7 @@ check "$?" "pacman"
 # cd 
 
 
-log "Installing needed official packages"
+log "Installing packages using package manager"
 sudo pacman -S --noconfirm --needed - < package_lists/packages
 check "$?" "pacman"
 
