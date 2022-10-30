@@ -1,4 +1,6 @@
 baobab
+cups
+exa
 gdm
 git
 gnome-calculator
@@ -30,7 +32,6 @@ htop
 intel-media-driver
 iwd
 libva-intel-driver
-lshw
 malcontent
 man-db
 man-pages
@@ -44,8 +45,10 @@ sof-firmware
 sushi
 tracker3-miners
 vim
+vlc
 vulkan-intel
 wireless_tools
+xarchiver
 xdg-user-dirs-gtk
 xdg-utils
 xorg-server

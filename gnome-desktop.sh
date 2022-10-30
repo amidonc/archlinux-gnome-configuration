@@ -90,4 +90,4 @@ check "$?" "sed"
 # rm -f -R <repo>
 # check "$?" "rm"
 
-log "Setup is done, please log out and log in back again ( type exit )"
+log "Setup is done, please log out and log in back again ( type exit ) or just reboot"
