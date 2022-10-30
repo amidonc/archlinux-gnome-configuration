@@ -74,7 +74,7 @@ do
 done
 
 log "Changing shell to zsh"
-sudo chsh -s /bin/zsh
+chsh -s /bin/zsh
 check "$?" "chsh"
 
 log "Setting shell in /etc/default/useradd to zsh"
