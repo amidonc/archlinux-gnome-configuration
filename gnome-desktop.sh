@@ -25,37 +25,18 @@ log "Refreshing pacman package database"
 sudo pacman -Sy
 check "$?" "pacman"
 
-
-# log "Installing git"
-# sudo pacman -S --noconfirm --needed git
-
-
-# log "Cloning repo"
-# git clone https://github.com/amidonc/
-# cd 
-
-
 log "Installing packages using package manager"
 sudo pacman -S --noconfirm --needed - < package_lists/packages
 check "$?" "pacman"
 
-# log "Copying terminus-ttf fonts to font directory"
-# sudo cp -f fonts/*.* /usr/share/fonts/
-# check "$?" "cp"
-
-# log "Copying settings to home folder"
-# cp -f -R home/. ~/
-# check "$?" "cp"
-
-# log "Syncing hwclock"
-# sudo hwclock -w
-# check "$?" "hwclock"
-                          
-# log "Starting services"
-# sudo systemctl enable acpid --now
-# sudo systemctl enable iwd --now
-# sudo systemctl enable bluetooth --now
-# sudo systemctl enable cups --now
+log "checking if git is installed"
+if [ "$(pacman -Qe | awk '/gits/ {print }'|wc -l)" -ge 1 ]; then
+  echo "git is already installed"
+else
+  echo "git is required, installing.."
+  sudo pacman -S --noconfirm --needed git
+fi
+check "$?" 
 
 log "Installing aur packages"
 me="$(whoami)"
@@ -73,6 +54,11 @@ do
     cd ..
 done
 
+log "Starting services"
+sudo systemctl enable iwd --now
+sudo systemctl enable bluetooth --now
+sudo systemctl enable cups --now
+
 log "Changing shell to zsh"
 chsh -s /bin/zsh
 check "$?" "chsh"
@@ -84,6 +70,18 @@ check "$?" "sed"
 log "Setting boot loader timeout to zero"
 sudo sed -i 's+timeout 3+timeout 0+g' /boot/loader/loader.conf
 check "$?" "sed"
+
+# log "Cloning repo"
+# git clone https://github.com/amidonc/
+# cd 
+
+# log "Copying terminus-ttf fonts to font directory"
+# sudo cp -f fonts/*.* /usr/share/fonts/
+# check "$?" "cp"
+
+# log "Copying settings to home folder"
+# cp -f -R home/. ~/
+# check "$?" "cp"
 
 # log "Cleaning up"
 # cd ..
