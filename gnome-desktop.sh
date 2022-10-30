@@ -39,13 +39,13 @@ fi
 check "$?" 
 
 log "Installing aur packages"
-me="$(whoami)"
+user="$(whoami)"
 cat package_lists/aur_packages | while read line 
 do
     log "Installing $line"
     cd /opt/
     sudo git clone https://aur.archlinux.org/$line.git
-    sudo chown -R $me:users $line 
+    sudo chown -R $user:users $line 
     cd $line
     makepkg -si --skippgpcheck --noconfirm
     check "$?" "makepkg"
